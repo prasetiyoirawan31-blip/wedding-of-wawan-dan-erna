@@ -1,0 +1,1092 @@
+/* =========================================
+   WEDDING INVITATION - WAWAN & ERNA
+   File: style.css
+========================================= */
+
+:root {
+    --pink: #a03d4e;
+    --dark-red: #690627;
+    --cream: #e6d7b9;
+    --brown: #76523b;
+    --gold: #a88762;
+    --shadow: 0 1px 2px rgba(85, 1, 1, 0.2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: "Work Sans", sans-serif;
+    min-height: 100%;
+}
+
+/* =========================================
+   HALAMAN 1 - COVER
+========================================= */
+
+.hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: 40px 20px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("assets/background.png");
+    background-size: 100% 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+.hero-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 750px;
+    margin: auto;
+}
+
+.hero h4 {
+    color: #a77b3c;
+    font-size: clamp(10px, 1.2vw, 15px);
+    letter-spacing: clamp(3px, 0.5vw, 5px);
+    margin-bottom: clamp(15px, 3vh, 30px);
+    text-shadow: var(--shadow);
+}
+
+.hero h1 {
+    color: var(--dark-red);
+    font-family: "Kaushan Script", cursive;
+    font-size: clamp(4rem, 11vw, 8rem);
+    font-weight: normal;
+    line-height: 1.05;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    display: block;
+}
+
+.invitation-text {
+    color: var(--brown);
+    font-size: clamp(12px, 1.5vw, 18px);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.simply-countdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: clamp(8px, 2vw, 18px);
+    width: 100%;
+    margin: 0 auto 25px;
+}
+
+.simply-countdown > .simply-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 0 0 auto;
+    width: clamp(52px, 7vw, 70px);
+    height: clamp(52px, 7vw, 70px);
+    margin: 0;
+    padding: 0;
+    background: var(--pink);
+    border-radius: 50%;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.simply-countdown > .simply-section > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.3;
+}
+
+.simply-countdown .simply-amount {
+    color: white;
+    font-size: clamp(13px, 1.5vw, 17px);
+    font-weight: 600;
+}
+
+.simply-countdown .simply-word {
+    color: white;
+    font-size: clamp(9px, 1vw, 12px);
+}
+
+.guest-info p {
+    color: var(--brown);
+    font-size: clamp(12px, 1.4vw, 17px);
+    margin-bottom: 15px;
+}
+
+.guest-info h3 {
+    color: #641522;
+    font-size: clamp(16px, 2vw, 23px);
+    margin-bottom: 10px;
+}
+
+.invitation-button {
+    color: var(--cream);
+    background-color: var(--pink);
+    border: none;
+    border-radius: 8px;
+    padding: 12px 28px;
+    margin-top: 10px;
+    font-family: "Work Sans", sans-serif;
+    font-size: clamp(14px, 2vw, 23px);
+    transition: all 0.3s ease;
+}
+
+.invitation-button:hover {
+    color: var(--pink);
+    background-color: var(--cream);
+    transform: translateY(-3px);
+}
+
+/* Animasi teks cover */
+.animate-text {
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards;
+}
+
+.delay-1 { animation-delay: 0.2s; }
+.delay-2 { animation-delay: 0.4s; }
+.delay-3 { animation-delay: 0.6s; }
+.delay-4 { animation-delay: 0.8s; }
+.delay-5 { animation-delay: 1s; }
+.delay-6 { animation-delay: 1.2s; }
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   TRANSISI COVER DAN ISI UNDANGAN
+========================================= */
+
+#hero {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    width: 100%;
+    min-height: 100vh;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease, visibility 0s linear 0s;
+}
+
+#invitation-content {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 1s ease, visibility 0s linear 0s;
+}
+
+body.invitation-open #hero {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.8s ease, visibility 0s linear 0.8s;
+}
+
+body.invitation-open #invitation-content {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* =========================================
+   NAVBAR
+========================================= */
+
+.mynavbar {
+    position: sticky;
+    top: 0;
+    z-index: 1030;
+    width: 100%;
+    padding: 10px 0;
+    background-color: rgba(255, 245, 235, 0.96);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.mynavbar .navbar-brand {
+    color: var(--dark-red);
+    font-family: "Kaushan Script", cursive;
+    font-size: clamp(22px, 3vw, 32px);
+}
+
+.mynavbar .nav-link {
+    color: var(--dark-red);
+    padding: 10px 15px;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.mynavbar .nav-link:hover {
+    color: var(--pink);
+}
+
+.mynavbar .navbar-toggler {
+    border: 1px solid var(--pink);
+    box-shadow: none;
+}
+
+.mynavbar .navbar-toggler-icon {
+    width: 22px;
+    height: 22px;
+}
+
+@media (max-width: 767.98px) {
+    .mynavbar .navbar-collapse {
+        background: rgba(255, 248, 240, 0.97);
+        padding: 15px;
+        margin-top: 12px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    .mynavbar .nav-link {
+        text-align: center;
+        padding: 12px;
+        font-size: 14px;
+    }
+}
+
+/* =========================================
+   HALAMAN 2 - COUPLE
+========================================= */
+
+.couple {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    padding: 80px 15px;
+    margin-top: 0;
+    scroll-margin-top: 75px;
+    background-image: url("assets/background2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.couple .container {
+    padding-top: 50px;
+}
+
+.couple-intro {
+    width: 100%;
+    max-width: 750px;
+    margin: 0 auto 70px;
+    text-align: center;
+}
+
+.couple-greeting {
+    color: #8b6b45;
+    font-family: "Kaushan Script", cursive;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+}
+
+.couple-description {
+    color: #8b6b45;
+    font-size: 14px;
+    line-height: 1.3;
+    margin-bottom: 20px;
+}
+
+.couple-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(130px, 220px) minmax(0, 1fr);
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+}
+
+.bridegroom,
+.bride {
+    min-width: 0;
+    color: #641522;
+}
+
+.bridegroom {
+    text-align: right;
+}
+
+.couple-layout .bridegroom h3,
+.couple-layout .bride h3 {
+    font-family: "Kaushan Script", cursive;
+    font-size: 36px;
+    font-weight: normal;
+    line-height: 1.3;
+    margin-bottom: 15px;
+    overflow-wrap: break-word;
+}
+
+.couple-layout .bridegroom h3 {
+    text-align: right;
+}
+
+.couple-layout .bride h3 {
+    text-align: left;
+}
+
+.couple-layout .bridegroom p,
+.couple-layout .bride p {
+    color: #76523b;
+    font-family: "Work Sans", sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.couple-photo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.couple-photo img {
+    display: block;
+    width: 100%;
+    max-width: 220px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    object-position: center;
+    border: 5px solid #fff5e8;
+    border-radius: 50%;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.couple-verse {
+    max-width: 750px;
+    margin: 45px auto 0;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.verse-arabic {
+    color: #8b6b45;
+    direction: rtl;
+    font-family: serif;
+    font-size: clamp(22px, 3vw, 32px);
+    line-height: 2;
+    margin-bottom: 15px;
+}
+
+.verse-translation {
+    color: #555;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0;
+}
+
+.couple-verse h4 {
+    color: #8b6b45;
+    font-family: "Kaushan Script", cursive;
+    font-size: 24px;
+    margin: 15px 0;
+}
+
+/* =========================================
+   HALAMAN 3 - EVENT
+========================================= */
+
+.event {
+    min-height: 100vh;
+    padding: 80px 20px;
+    text-align: center;
+    background-image: url("assets/background3.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.event-heading {
+    padding-top: 85px;
+    margin-bottom: 55px;
+}
+
+.event-heading h2 {
+    color: #70432f;
+    font-family: "Kaushan Script", cursive;
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.event-heading p {
+    max-width: 600px;
+    color: #66594c;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 0 auto 35px;
+}
+
+.event-container {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.event-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-width: 0;
+    aspect-ratio: 1 / 1;
+    padding: 12px;
+    overflow-wrap: anywhere;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid #d8c3a5;
+    border-radius: 15px;
+}
+
+.event-card h3,
+.event-location h3 {
+    color: #70432f;
+    font-family: "Kaushan Script", cursive;
+    font-size: 27px;
+    margin-bottom: 18px;
+}
+
+.event-card p,
+.event-location p {
+    color: #66594c;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.event-date {
+    font-weight: bold;
+}
+
+.event-location {
+    max-width: 600px;
+    margin: 40px auto 0;
+    padding: 25px 15px;
+}
+
+.maps-container {
+    width: 100%;
+    margin: 20px auto;
+    overflow: hidden;
+    border: 5px solid #b99b72;
+    border-radius: 20px;
+}
+
+.maps-container iframe {
+    display: block;
+    width: 100%;
+    height: 300px;
+    border: 0;
+}
+
+.btn-maps {
+    display: inline-block;
+    color: white;
+    background: #8b6b4b;
+    text-decoration: none;
+    padding: 12px 25px;
+    margin-top: 10px;
+    border-radius: 30px;
+}
+
+.btn-maps:hover {
+    color: white;
+    background: #70432f;
+}
+
+/* =========================================
+   HALAMAN 4 - WEDDING GIFT
+========================================= */
+
+.gift {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #f8f4ee;
+}
+
+.gift-heading {
+    max-width: 550px;
+    margin: 0 auto 40px;
+}
+
+.gift-heading h2,
+.rsvp-heading h2 {
+    color: #a88762;
+    font-family: "Kaushan Script", cursive;
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.gift-heading p,
+.rsvp-heading p {
+    color: #666;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.gift-card {
+    max-width: 420px;
+    margin: 0 auto 25px;
+    padding: 30px 25px;
+    background: linear-gradient(135deg, #fffaf2, #e9dfcf);
+    border: 1px solid #c8ad86;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.gift-icon {
+    color: #a88762;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.gift-card h3,
+.gift-thankyou h3 {
+    color: #a88762;
+    font-family: "Kaushan Script", cursive;
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+
+.gift-description {
+    color: #666;
+    font-family: "Work Sans", sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+    margin-bottom: 25px;
+}
+
+.gift-bank {
+    color: #8d704d;
+    font-family: "Work Sans", sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin: 20px 0;
+}
+
+.gift-label {
+    color: #888;
+    font-family: "Work Sans", sans-serif;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.gift-detail {
+    margin: 20px 0;
+}
+
+.gift-detail h4,
+.gift-card h4 {
+    color: #5c4935;
+    font-family: "Work Sans", sans-serif;
+    font-size: 16px;
+    overflow-wrap: anywhere;
+    margin-bottom: 15px;
+}
+
+.gift-detail p:not(.gift-label) {
+    color: #5c4935;
+    font-family: "Work Sans", sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.gift-owner {
+    color: #5c4935;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    margin-bottom: 20px;
+}
+
+.gift-copy-button {
+    color: white;
+    background-color: #a88762;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 20px;
+    font-family: "Work Sans", sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.gift-copy-button:hover {
+    background-color: #896b49;
+}
+
+.gift-thankyou {
+    max-width: 500px;
+    margin: 40px auto 0;
+}
+
+.gift-thankyou p {
+    color: #777;
+    font-family: "Work Sans", sans-serif;
+    font-size: 13px;
+    line-height: 1.8;
+}
+
+.gift-thankyou h3 {
+    font-size: 28px;
+    margin-top: 20px;
+}
+
+/* =========================================
+   HALAMAN 5 - RSVP
+========================================= */
+
+.rsvp {
+    padding: 80px 20px;
+    text-align: center;
+    background-color: #f8f4ee;
+}
+
+.rsvp-heading {
+    max-width: 550px;
+    margin: 0 auto 35px;
+}
+
+.rsvp-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #d8c5a8;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.rsvp-form-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.rsvp-form-group label {
+    display: block;
+    color: #6e5945;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.rsvp-form-group input,
+.rsvp-form-group select,
+.rsvp-form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    color: #555;
+    background-color: #fff;
+    border: 1px solid #d8c5a8;
+    border-radius: 8px;
+    outline: none;
+    box-sizing: border-box;
+    font-family: "Work Sans", sans-serif;
+    font-size: 14px;
+}
+
+.rsvp-form-group input:focus,
+.rsvp-form-group select:focus,
+.rsvp-form-group textarea:focus {
+    border-color: #a88762;
+    box-shadow: 0 0 5px rgba(168, 135, 98, 0.2);
+}
+
+.rsvp-form-group textarea {
+    resize: vertical;
+}
+
+.rsvp-button {
+    width: 100%;
+    padding: 13px;
+    color: white;
+    background-color: #a88762;
+    border: none;
+    border-radius: 8px;
+    font-family: "Work Sans", sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.rsvp-button:hover {
+    background-color: #896b49;
+}
+
+/* =========================================
+   ANIMASI SAAT SCROLL
+   Elemen muncul kembali setiap masuk viewport
+========================================= */
+
+.couple-intro,
+.bridegroom,
+.bride,
+.couple-verse,
+.event-heading,
+.event-card,
+.event-location,
+.maps-container,
+.gift-heading,
+.gift-card,
+.gift-thankyou,
+.rsvp-heading,
+.rsvp-container {
+    opacity: 0;
+    transform: translateY(35px);
+    transition:
+        opacity 1s ease,
+        transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.couple-photo {
+    opacity: 0;
+    transform: scale(0.85);
+    transition:
+        opacity 1.2s ease,
+        transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.couple-intro.show,
+.bridegroom.show,
+.bride.show,
+.couple-verse.show,
+.event-heading.show,
+.event-card.show,
+.event-location.show,
+.maps-container.show,
+.gift-heading.show,
+.gift-card.show,
+.gift-thankyou.show,
+.rsvp-heading.show,
+.rsvp-container.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.couple-photo.show {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Jeda animasi Couple */
+.couple-intro { transition-delay: 0.1s; }
+.bridegroom { transition-delay: 0.2s; }
+.couple-photo { transition-delay: 0.3s; }
+.bride { transition-delay: 0.4s; }
+.couple-verse { transition-delay: 0.2s; }
+
+/* Jeda kartu Event */
+.event-card:nth-child(1) { transition-delay: 0.1s; }
+.event-card:nth-child(2) { transition-delay: 0.3s; }
+
+/* =========================================
+   RESPONSIVE TABLET DAN HP
+========================================= */
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 30px 15px;
+    }
+
+    .hero-content {
+        max-width: 600px;
+    }
+
+    .couple-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(120px, 180px) minmax(0, 1fr);
+        gap: 12px;
+    }
+
+    .couple-layout .bridegroom h3,
+    .couple-layout .bride h3 {
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding: 25px 12px;
+    }
+
+    .hero h1 {
+        margin-bottom: 20px;
+    }
+
+    .simply-countdown {
+        gap: 8px;
+    }
+
+    .couple {
+        padding: 70px 0;
+    }
+
+    .couple-layout {
+        grid-template-columns: minmax(0, 1fr) minmax(100px, 28vw) minmax(0, 1fr);
+        gap: 7px;
+    }
+
+    .couple-photo img {
+        border-width: 3px;
+    }
+
+    .couple-layout .bridegroom h3,
+    .couple-layout .bride h3 {
+        font-size: 19px;
+        line-height: 1.3;
+        margin-bottom: 8px;
+    }
+
+    .couple-layout .bridegroom p,
+    .couple-layout .bride p {
+        font-size: 11px;
+        line-height: 1.5;
+    }
+
+    .couple-verse {
+        margin-top: 30px;
+        padding: 20px 10px;
+    }
+
+    .verse-arabic {
+        font-size: 21px;
+        line-height: 2;
+    }
+
+    .verse-translation {
+        font-size: 13px;
+    }
+
+    .couple-verse h4 {
+        font-size: 21px;
+    }
+
+    .event {
+        padding: 55px 15px;
+    }
+
+    .event-heading {
+        padding-top: 55px;
+        margin-bottom: 30px;
+    }
+
+    .event-heading h2 {
+        font-size: 32px;
+    }
+
+    .event-container {
+        gap: 8px;
+    }
+
+    .event-card {
+        padding: 8px;
+    }
+
+    .event-card h3 {
+        font-size: 18px;
+        margin-bottom: 8px;
+    }
+
+    .event-card p {
+        font-size: 11px;
+        line-height: 1.5;
+        margin-bottom: 5px;
+    }
+
+    .event-location h3 {
+        font-size: 24px;
+    }
+
+    .gift,
+    .rsvp {
+        padding: 60px 15px;
+    }
+
+    .gift-heading h2,
+    .rsvp-heading h2 {
+        font-size: 32px;
+    }
+
+    .gift-card {
+        padding: 25px 18px;
+    }
+
+    .rsvp-container {
+        padding: 22px 18px;
+    }
+}
+
+/* Aksesibilitas: kurangi animasi bila pengguna mengaturnya */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .animate-text {
+        opacity: 1;
+        animation: none;
+    }
+
+    .invitation-button,
+    .couple-intro,
+    .bridegroom,
+    .bride,
+    .couple-photo,
+    .couple-verse,
+    .event-heading,
+    .event-card,
+    .event-location,
+    .maps-container,
+    .gift-heading,
+    .gift-card,
+    .gift-thankyou,
+    .rsvp-heading,
+    .rsvp-container {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
+
+/* BACKGROUND HALAMAN 5 - WEDDING GIFT */
+#gift {
+    background-image: url("assets/background5.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+/* BACKGROUND HALAMAN 4 - WEDDING GIFT */
+#rsvp {
+    background-image: url("assets/background4.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+/* =================================
+   PERBAIKAN BAGIAN RSVP
+================================= */
+
+/* Judul dan deskripsi RSVP */
+.rsvp-heading {
+    max-width: 600px;
+    margin: 0 auto 35px;
+    padding: 18px 20px;
+    background: rgba(255, 250, 242, 0.82);
+    border-radius: 15px;
+    text-align: center;
+}
+
+.rsvp-title {
+    color: #79543d;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 42px;
+    text-shadow: 1px 2px 3px rgba(80, 50, 30, 0.15);
+    margin-bottom: 15px;
+}
+
+.rsvp-description {
+    color: #594638;
+    font-size: 16px;
+    line-height: 1.8;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+
+/* Ucapan penutup */
+.rsvp-closing {
+    max-width: 650px;
+    margin: 45px auto 20px;
+    padding: 30px 20px;
+    text-align: center;
+    color: #654c3b;
+}
+
+.rsvp-closing h3 {
+    font-family: 'Kaushan Script', cursive;
+    font-size: 32px;
+    color: #956f50;
+    margin-bottom: 18px;
+}
+
+.rsvp-closing p {
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 12px;
+}
+
+.rsvp-closing span {
+    display: block;
+    margin-top: 22px;
+    font-family: 'Kaushan Script', cursive;
+    font-size: 28px;
+    color: #79543d;
+}
+
+.music-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9998;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    background: #a98763;
+    color: white;
+    font-size: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
